@@ -1,6 +1,11 @@
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
+        Node node = Tree.insert("1", Tree.root);
+        if (Tree.checkViolation(node)){
+
+        }
     }
 }
