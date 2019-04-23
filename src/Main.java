@@ -1,11 +1,16 @@
+public class Main
+{
 
-public class Main {
+    public static void main(String[] args)
+    {
+        RedBlackTree tree = new RedBlackTree();
 
-    public static void main(String[] args) {
+        tree.add("4");
+        tree.add("3");
+        tree.add("2");
+        tree.add("1");
+        tree.add("0");
 
-        Node node = Tree.insert("1", Tree.root);
-        if (Tree.checkViolation(node)){
-
-        }
+        tree.printPreorder(tree.root);
     }
 }

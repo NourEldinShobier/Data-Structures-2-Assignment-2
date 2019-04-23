@@ -2,17 +2,15 @@ import enums.NodeColor;
 
 class Node
 {
-    public NodeColor color = NodeColor.RED;
-    public String data = "";
-    public Node parent;
-    public Node right;
-    public Node left;
+    NodeColor color = NodeColor.RED;
+    String value;
+    Node parent;
+    Node right;
+    Node left;
 
-    public Node(String data, Node parent, Node right, Node left)
+    Node(String value)
     {
-        this.data = data;
-        this.parent = parent;
-        this.right = right;
-        this.left = left;
+        this.value = value;
+        this.right = this.left = this.parent = null;
     }
 }
