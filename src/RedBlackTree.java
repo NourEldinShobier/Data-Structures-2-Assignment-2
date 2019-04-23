@@ -1,14 +1,20 @@
 import enums.NodeColor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 class RedBlackTree
 {
     Node root;
+    int size = 0;
     private Node tempParent;
     private Node newNode;
 
 
     void add(String value)
     {
+        size++;
         tempParent = newNode = null;
         root = add(root, value);
         addFixup(newNode);
@@ -100,19 +106,24 @@ class RedBlackTree
         root.color = NodeColor.BLACK;
     }
 
-    void search(String data)
+    boolean search(String value)
     {
-
+        return search(value, root);
     }
 
-    private void search(String data, Node node)
+    private boolean search(String value, Node current)
     {
+        if (current == null) return false;
+        if (value.equals(current.value)) return true;
 
+        return Integer.parseInt(value) < Integer.parseInt(current.value)
+                ? search(value, current.left)
+                : search(value, current.right);
     }
 
     void delete(String data)
     {
-
+        size--;
     }
 
     private void delete(String data, Node node)
@@ -176,5 +187,32 @@ class RedBlackTree
         printInorder(node.left);
         System.out.println(node.value + ", " + node.color);
         printInorder(node.right);
+    }
+
+    void loadVocabs(){
+        try {
+            Scanner scanner = new Scanner(new File("C:\\DS\\vocabs.txt"));
+            while (scanner.hasNextLine()) add(scanner.nextLine().trim());
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    int findHeight(){
+        return findHeight(root);
+    }
+
+    private int findHeight(Node aNode) {
+        if (aNode == null) return -1;
+
+        int lefth = findHeight(aNode.left);
+        int righth = findHeight(aNode.right);
+
+        if (lefth > righth) {
+            return lefth + 1;
+        } else {
+            return righth + 1;
+        }
     }
 }
