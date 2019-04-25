@@ -1,14 +1,12 @@
 import java.util.Scanner;
 
-public class Main
-{
+public class Main {
 
-    public static void main(String[] args)
-    {
-        RedBlackTree tree = new RedBlackTree();
+    public static void main(String[] args) {
 
-        //tree.loadVocabs();
-        //System.out.println(tree.findHeight());
+        DRBTree tree = new DRBTree();
+        tree.initRoot();
+        tree.loadVocabs();
 
         while (true) {
             loadMenu();
@@ -18,30 +16,45 @@ public class Main
 
             System.out.print("\nChoise: ");
             int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    System.out.print("\nEnter Word: ");
+                    System.out.println("\nEnter Word: ");
                     input = scanner.nextLine();
                     tree.add(input);
+                    System.out.println("Height: " + tree.findHeight());
+                    System.out.println("Size: " + tree.size);
+
                     break;
                 case 2:
-                    System.out.print("\nEnter Word: ");
+                    System.out.println("\nEnter Word: ");
                     input = scanner.nextLine();
 
-                    System.out.println(tree.search(input));
+                    System.out.println(tree.search(input) != null ? "YES" : "NO");
+                    System.out.println("Height: " + tree.findHeight());
+                    System.out.println("Size: " + tree.size);
+
                     break;
                 case 3:
-                    System.out.print("\nEnter Word: ");
+                    System.out.println("\nEnter Word: ");
                     input = scanner.nextLine();
 
-                    tree.delete(input);
+                    if (tree.search(input) != null) {
+                        tree.Size_Decrement();
+                        tree.delete(input);
+                        System.out.println("Height: " + tree.findHeight());
+                        System.out.println("Size: " + tree.size);
+                    } else {
+                        System.out.println("\nWord not in the dicionary ");
+                    }
+
                     break;
                 case 4:
-                    System.out.print("\nHeight: " + tree.findHeight());
+                    System.out.println("\nHeight: " + tree.findHeight());
                     break;
                 case 5:
-                    System.out.print("\nSize: " + tree.size);
+                    System.out.println("\nSize: " + tree.size);
                     break;
                 case 6:
                     System.exit(0);
@@ -50,8 +63,7 @@ public class Main
         }
     }
 
-    private static void loadMenu()
-    {
+    private static void loadMenu() {
         System.out.println("---------");
         System.out.println("Main Menu");
         System.out.println("---------");
